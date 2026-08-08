@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MBN — Liam Helton</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --charcoal: #1a1816;
+    --charcoal-light: #232019;
+    --gold: #c9a961;
+    --gold-soft: #a8874f;
+    --cream: #f4f0e8;
+    --cream-dim: #d8d2c4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--charcoal);
+    color: var(--cream-dim);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .thread {
+    position: fixed;
+    top: 0; left: 50%;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--gold-soft) 10%, var(--gold-soft) 90%, transparent);
+    opacity: 0.25;
+    z-index: 0;
+  }
+
+  section {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 100px 32px;
+  }
+
+  .hero {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding-top: 60px;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 44px;
+    color: var(--cream);
+    margin-bottom: 18px;
+    letter-spacing: -0.5px;
+  }
+
+  .tagline {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-size: 19px;
+    color: var(--cream-dim);
+    margin-bottom: 36px;
+  }
+
+  .hero-body {
+    font-size: 15px;
+    color: var(--cream-dim);
+    max-width: 480px;
+    margin: 0 auto;
+    opacity: 0.85;
+  }
+
+  .scroll-hint {
+    margin-top: 60px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold-soft);
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 28px;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+
+  .section-intro {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--gold-soft);
+    margin-bottom: 48px;
+    max-width: 480px;
+  }
+
+  .book-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 640px) {
+    .book-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .book-card {
+    border: 1px solid rgba(201, 169, 97, 0.2);
+    background: var(--charcoal-light);
+    padding: 28px 24px;
+    transition: border-color 0.3s ease;
+  }
+
+  .book-card:hover { border-color: var(--gold-soft); }
+
+  .book-num {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .book-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .book-desc {
+    font-size: 13px;
+    color: var(--cream-dim);
+    opacity: 0.75;
+  }
+
+  .book-tag {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gold-soft);
+    text-transform: uppercase;
+  }
+
+  .architecture {
+    background: var(--cream);
+    color: var(--charcoal);
+    text-align: center;
+  }
+
+  .architecture h2 { color: var(--charcoal); }
+
+  .architecture p {
+    font-family: 'Source Serif 4', serif;
+    font-size: 15px;
+    max-width: 460px;
+    margin: 0 auto;
+    color: #4a4640;
+  }
+
+  .architecture .book-tag { color: var(--gold-soft); }
+
+  .image-series-card {
+    border: 1px solid rgba(201, 169, 97, 0.2);
+    background: var(--charcoal-light);
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .image-series-card .cover-placeholder {
+    height: 200px;
+    background: linear-gradient(135deg, #2a2620, #1a1816);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gold-soft);
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .image-series-content { padding: 24px; }
+
+  .volume-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .about {
+    text-align: left;
+  }
+
+  .about a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold-soft);
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px 32px 80px;
+    font-size: 12px;
+    color: var(--cream-dim);
+    opacity: 0.5;
+  }
+</style>
+</head>
+<body>
+
+<div class="thread"></div>
+
+<section class="hero">
+  <div class="eyebrow">MBN &middot; Mind / Body / Nutrition</div>
+  <h1>Liam Helton</h1>
+  <p class="tagline">Ten books. One long argument for paying attention.</p>
+  <p class="hero-body">
+    Since 2010, Liam has written over fifteen thousand numbered reflections —
+    on the ego, love, death, money, and the mind that gets in the way of all
+    of it. These books are what came of the ones worth keeping.
+  </p>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<section>
+  <div class="eyebrow">MBN Wisdom Series &middot; Seven Volumes</div>
+  <h2>Interviews with the parts of yourself</h2>
+  <p class="section-intro">
+    Each volume is a conversation — Liam questioned, pushed, and pressed by
+    the very forces he's writing about. Read in order, or wherever the title
+    calls to you.
+  </p>
+
+  <div class="book-grid">
+    <div class="book-card">
+      <div class="book-num">0</div>
+      <div class="book-title">The Origin Story</div>
+      <div class="book-desc">An interview with the ego, the soul, and the questioner.</div>
+      <div class="book-tag">Book 0</div>
+    </div>
+    <div class="book-card">
+      <div class="book-num">1</div>
+      <div class="book-title">The Misnomer's Doorway</div>
+      <div class="book-desc">Death, past lives, and the hypnosis that opened the door.</div>
+      <div class="book-tag">Book 1</div>
+    </div>
+    <div class="book-card">
+      <div class="book-num">2</div>
+      <div class="book-title">Not the Enemy</div>
+      <div class="book-desc">Ego, the false self, and the fear that built it.</div>
+      <div class="book-tag">Book 2</div>
+    </div>
+    <div class="book-card">
+      <div class="book-num">3</div>
+      <div class="book-title">Wisdom Erases Karma</div>
+      <div class="book-desc">Experience, wisdom, and the karma between them.</div>
+      <div class="book-tag">Book 3</div>
+    </div>
+    <div class="book-card">
+      <div class="book-num">4</div>
+      <div class="book-title">The Mind That Prospers</div>
+      <div class="book-desc">Money, materialism, and the discipline between them.</div>
+      <div class="book-tag">Book 4</div>
+    </div>
+    <div class="book-card">
+      <div class="book-num">5</div>
+      <div class="book-title">Compressed Atoms</div>
+      <div class="book-desc">Matter, consciousness, and the dream we're playing in.</div>
+      <div class="book-tag">Book 5</div>
+    </div>
+    <div class="book-card">
+      <div class="book-num">6</div>
+      <div class="book-title">God Is, Nothing Else Isn't</div>
+      <div class="book-desc">Possibilities on faith, beyond religion.</div>
+      <div class="book-tag">Book 6</div>
+    </div>
+  </div>
+</section>
+
+<section class="architecture">
+  <div class="eyebrow" style="color: var(--gold-soft);">Standalone</div>
+  <h2>The Architecture</h2>
+  <p style="margin-bottom: 16px; font-style: italic;">What was underneath the whole time.</p>
+  <p>
+    A single continuous essay, no interview, no scaffolding — eight movements
+    tracing the ego's formation, the body, and what remains once the noise
+    clears. The shortest book here, and the one closest to Liam's own voice.
+  </p>
+</section>
+
+<section>
+  <div class="eyebrow">MBN Image Book Series &middot; Quote + Art</div>
+  <h2>One theme. One image per page.</h2>
+  <p class="section-intro">
+    A newer format — each reflection paired with a piece of art made for it
+    alone, moving between light and shadow the way the subject itself does.
+  </p>
+
+  <div class="image-series-card">
+    <div class="cover-placeholder">Cover Image</div>
+    <div class="image-series-content">
+      <div class="volume-label">Volume One</div>
+      <div class="book-title" style="font-size: 22px; margin-bottom: 8px;">Love, In Light and Shadow</div>
+      <div class="book-desc" style="font-style: italic; margin-bottom: 12px;">35 reflections &middot; four movements</div>
+      <div class="book-desc">
+        From the weight we carry through what remains once love is finally
+        let go of correctly — every reflection facing a piece of art made
+        only for it.
+      </div>
+    </div>
+  </div>
+
+  <div class="image-series-card">
+    <div class="cover-placeholder">Cover Image</div>
+    <div class="image-series-content">
+      <div class="volume-label">Volume Two</div>
+      <div class="book-title" style="font-size: 22px; margin-bottom: 8px;">Ego, In Light and Shadow</div>
+      <div class="book-desc" style="font-style: italic; margin-bottom: 12px;">40 reflections &middot; four movements</div>
+      <div class="book-desc">
+        The ego isn't the enemy — it's a negotiator, not a terminator. Forty
+        reflections on the mask, the cost, and what it looks like to work in
+        tandem with it instead of against it.
+      </div>
+    </div>
+  </div>
+
+  <div class="image-series-card">
+    <div class="cover-placeholder">Cover Not Yet Chosen</div>
+    <div class="image-series-content">
+      <div class="volume-label">Volume Three &middot; In Progress</div>
+      <div class="book-title" style="font-size: 22px; margin-bottom: 8px;">Money, In Light and Shadow</div>
+      <div class="book-desc" style="font-style: italic; margin-bottom: 12px;">In production</div>
+      <div class="book-desc">
+        The next volume, underway now — on money as trigger, materialism as
+        a dream, and what's left once the chase ends.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="eyebrow">About</div>
+  <h2>Liam Helton has spent over a decade putting daily reflections into the world.</h2>
+  <p style="margin-top: 20px; font-family: 'Source Serif 4', serif; font-size: 15px; max-width: 480px;">
+    First as a private practice, later shared publicly, and now continued on
+    Instagram. His writing draws from a long personal journey of
+    transformation, one that began after his release from prison in 2003 and
+    deepened through years of questioning, study, and lived experience.
+  </p>
+  <p style="margin-top: 28px;">
+    <a href="https://www.instagram.com/compressed_atoms" target="_blank">@compressed_atoms</a>
+  </p>
+</section>
+
+<footer>
+  MBN — Mind / Body / Nutrition. All books written by Liam Helton.
+</footer>
+
+</body>
+</html>
