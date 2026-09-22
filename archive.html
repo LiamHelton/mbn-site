@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MBN Reflection Archive</title>
+<meta name="description" content="Enter the living archive of MBN Wisdom reflections.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;1,400&family=Inter:wght@500;600&family=Source+Serif+4:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0d0d;--panel:#171717;--gold:#c49555;--bright:#e0bd8c;--cream:#f4efe4;--dim:#aaa193}
+*{box-sizing:border-box}html{background:var(--bg);scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 50% 0,rgba(224,189,140,.16),transparent 34%),var(--bg);color:var(--cream);font-family:"Source Serif 4",serif;min-height:100vh}
+nav{display:flex;justify-content:space-between;align-items:center;max-width:980px;margin:auto;padding:24px}
+nav a{color:var(--bright);font-family:Inter,sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none}
+main{max-width:820px;margin:auto;padding:72px 24px 110px;text-align:center}
+.eyebrow{color:var(--gold);font-family:Inter,sans-serif;font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase}
+h1{font-family:Fraunces,serif;font-size:clamp(44px,9vw,82px);font-weight:400;line-height:1.04;margin:18px 0 22px}
+.intro{color:var(--dim);font-size:18px;line-height:1.7;max-width:650px;margin:0 auto 44px}
+.portal{background:linear-gradient(145deg,rgba(255,255,255,.025),rgba(196,149,85,.08));border:1px solid rgba(196,149,85,.4);padding:clamp(30px,6vw,58px);min-height:390px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 28px 90px rgba(0,0,0,.34)}
+.number{font-family:Inter,sans-serif;color:var(--gold);font-size:12px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:22px}
+blockquote{font-family:Fraunces,serif;font-size:clamp(24px,4.5vw,38px);line-height:1.42;margin:0;color:var(--cream)}
+button{margin:34px auto 0;background:var(--gold);color:#15120f;border:0;padding:15px 26px;font-family:Inter,sans-serif;font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;border-radius:2px}
+button:hover{background:var(--bright)}.note{color:var(--dim);font-size:13px;margin-top:28px}
+footer{border-top:1px solid rgba(196,149,85,.2);padding:28px;text-align:center;color:var(--dim);font-size:12px;letter-spacing:.08em}
+</style>
+</head>
+<body>
+<nav><a href="index.html">← MBN Wisdom</a><a href="coffee-with-liam.html">Coffee with Liam</a></nav>
+<main>
+<div class="eyebrow">The Living Archive</div>
+<h1>Pause long enough to be found.</h1>
+<p class="intro">These words were written across years of questioning, transformation, and becoming. Enter without searching for the answer you want. Allow the reflection that appears to meet the part of you that is ready.</p>
+<section class="portal" aria-live="polite">
+<div class="number" id="number">Reflection 14827</div>
+<blockquote id="reflection">Your beliefs become the unseen forces that manifest either blessings or suffering into your life.</blockquote>
+<button id="draw" type="button">Receive another reflection</button>
+</section>
+<p class="note">A growing gateway into thousands of MBN Wisdom reflections.</p>
+</main>
+<footer>Words by Liam Helton · MBN Wisdom</footer>
+<script>
+const reflections=[
+["14827","Your beliefs become the unseen forces that manifest either blessings or suffering into your life."],
+["14830","Rather than complain about prices, people, jobs, or circumstances, make intentional decisions today that reduce their power over your tomorrow. Prepare, adjust, and navigate wisely before hardship becomes an emergency. Difficult seasons do not define your life unless you refuse to change course. The wave will keep moving, with or without you, so rise above it, redirect your path, and move forward with purpose."],
+["14834","What if life’s greatest disruptions arrive not to destroy us, but to shake loose those who no longer possess the strength, loyalty, or alignment to travel where our soul is leading? What feels like loss in the moment may later reveal itself as divine precision, removing the weight that would have delayed our becoming. Look back and recognize the intelligence within the separation. Then offer grace to those who fell away. They were not meant to reach every destination with you."],
+["14839","It is amazing what becomes possible when we recognize every human being as equally important. We begin to break free from the illusion that some people belong above us while others belong beneath us. Every individual carries a unique trait, gift, or purpose into this world. The moment you liberate yourself from fear and the opinions of others, your true gift begins to emerge. Everyone is important. Now live in a way that proves to you that you are too."],
+["14851","Discomfort is not the enemy. It is the soul’s invitation to step beyond the boundaries of uncertainty. Growth begins where familiarity ends, and the moment you stop resisting the unknown, true transformation begins. That is where the magic lives."],
+["14852","You are not a work in progress simply because time continues to pass. Progress requires movement, not the repetition of the same choices. If you keep circling the same wound without choosing differently, you are not moving forward. You are looping within the madness you refuse to leave."]
+];
+let current=0;
+const daily=Math.floor(Date.now()/86400000)%reflections.length;
+function show(i){current=i;document.getElementById("number").textContent="Reflection "+reflections[i][0];document.getElementById("reflection").textContent=reflections[i][1]}
+show(daily);
+document.getElementById("draw").addEventListener("click",()=>{let next;do{next=Math.floor(Math.random()*reflections.length)}while(next===current);show(next)});
+</script>
+</body>
+</html>
