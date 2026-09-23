@@ -272,16 +272,18 @@
     flex-wrap:wrap;
     justify-content:center;
   }
-  .signup-form .formkit-fields{
-    display:flex;
+  .signup-form.formkit-form[data-uid]{ max-width:500px !important; }
+  .signup-form.formkit-form[data-uid] .formkit-fields{
+    display:flex !important;
     gap:10px;
     width:100%;
     flex-wrap:wrap;
     justify-content:center;
   }
-  .signup-form .formkit-field{ flex:1 1 210px; margin:0; }
-  .signup-form .formkit-submit{ margin:0; }
-  .signup-form .formkit-alert{ flex:1 0 100%; margin:0; padding:0; list-style:none; }
+  .signup-form.formkit-form[data-uid] .formkit-field{ flex:1 1 210px !important; margin:0 !important; }
+  .signup-form.formkit-form[data-uid] .formkit-submit{ flex:0 0 auto !important; margin:0 !important; position:static !important; }
+  .signup-form.formkit-form[data-uid] .formkit-alert{ flex:1 0 100%; margin:0; padding:0; list-style:none; }
+  .signup-form.formkit-form[data-uid] input.formkit-input{ width:100% !important; height:auto !important; }
   .signup-form input[type="email"]{
     flex:1 1 210px;
     min-width:0;
