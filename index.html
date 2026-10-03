@@ -751,6 +751,178 @@
 
 <footer>MBN · Mind / Body / Nutrition. All books written by Liam Helton.</footer>
 
-<section id="archive" style="padding:90px 24px;text-align:center;color:#f4efe4;background:radial-gradient(circle at top,rgba(224,189,140,.16),transparent 42%),#0d0d0d;border-top:1px solid rgba(224,189,140,.35)"><div style="max-width:760px;margin:auto"><div style="color:#e0bd8c;font-size:24px;letter-spacing:10px;margin-bottom:22px">✦ ✦ ✦</div><p style="color:#c49555;font-size:12px;font-weight:700;letter-spacing:.25em;text-transform:uppercase">The Living Archive</p><h2 style="margin:18px 0 24px;color:#f4efe4;font-family:Georgia,serif;font-size:clamp(38px,7vw,70px);font-weight:400;line-height:1.08">Thousands of reflections.<br><em style="color:#e0bd8c">One may be waiting for you.</em></h2><p style="max-width:620px;margin:0 auto 34px;color:rgba(244,239,228,.75);font-size:18px;line-height:1.7">Written across more than fifteen years of questioning, transformation, and becoming. Enter the archive and allow the reflection that finds you to meet you exactly where you are.</p><a href="archive.html" style="display:inline-block;padding:18px 28px;color:#141414;background:linear-gradient(135deg,#e0bd8c,#c49555);text-decoration:none;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase">Enter the Reflection Archive →</a><small style="display:block;margin-top:28px;color:rgba(244,239,228,.45);font-size:11px;letter-spacing:.16em;text-transform:uppercase">Words by Liam Helton · MBN Wisdom</small></div></section>
+<style>
+.fd-section{padding:90px 24px 70px;text-align:center;color:#f4efe4;background:radial-gradient(circle at top,rgba(224,189,140,.16),transparent 42%),#0d0d0d;border-top:1px solid rgba(224,189,140,.35)}
+.fd-wrap{max-width:760px;margin:auto}
+.fd-glyphrow{color:#e0bd8c;font-size:24px;letter-spacing:10px;margin-bottom:22px}
+.fd-eyebrow{color:#c49555;font-size:12px;font-weight:700;letter-spacing:.25em;text-transform:uppercase}
+.fd-h2{margin:18px 0 16px;color:#f4efe4;font-family:Georgia,serif;font-size:clamp(38px,7vw,70px);font-weight:400;line-height:1.08}
+.fd-h2 em{color:#e0bd8c;font-style:italic}
+.fd-intro{max-width:560px;margin:0 auto 46px;color:rgba(244,239,228,.75);font-size:17px;line-height:1.7}
+.fd-stage{position:relative;width:min(64vw,250px);aspect-ratio:1;margin:0 auto 22px}
+.fd-ring{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 50% 42%,#1d1912,#0e0c09 72%);box-shadow:inset 0 0 0 1px rgba(196,149,85,.35),inset 0 16px 36px rgba(0,0,0,.65),0 20px 50px rgba(0,0,0,.5)}
+.fd-tick{position:absolute;top:50%;left:50%;width:0;height:0;transform-origin:0 0}
+.fd-tick .fd-glyph{position:absolute;left:-9px;top:-114px;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#aaa193;transition:color .35s,text-shadow .35s,transform .35s}
+.fd-tick.active .fd-glyph{color:#e0bd8c;text-shadow:0 0 12px rgba(224,189,140,.75);transform:scale(1.25)}
+.fd-pointer{position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:10px solid #c49555;filter:drop-shadow(0 0 5px rgba(196,149,85,.6))}
+.fd-knob{position:absolute;left:14%;top:14%;width:72%;height:72%;border-radius:50%;background:radial-gradient(circle at 34% 28%,#3a2f20,#211b12 55%,#15110b 100%);box-shadow:inset 0 2px 3px rgba(255,255,255,.12),inset 0 -9px 16px rgba(0,0,0,.6),0 8px 20px rgba(0,0,0,.5);cursor:grab;touch-action:none;display:flex;align-items:center;justify-content:center}
+.fd-knob:active{cursor:grabbing}
+.fd-knob::before{content:"";position:absolute;width:86%;height:86%;border-radius:50%;border:1px solid rgba(196,149,85,.22)}
+.fd-needle{position:absolute;top:8%;left:50%;width:2px;height:40%;transform-origin:50% 100%;transform:translateX(-50%);background:linear-gradient(to top,#c49555,#e0bd8c);box-shadow:0 0 9px rgba(224,189,140,.7);border-radius:2px}
+.fd-needle::after{content:"";position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;background:#e0bd8c;box-shadow:0 0 10px rgba(224,189,140,.9)}
+.fd-hub{width:22%;height:22%;border-radius:50%;background:radial-gradient(circle at 38% 32%,#5b4a30,#201a11);box-shadow:inset 0 0 0 1px rgba(196,149,85,.4),0 1px 2px rgba(0,0,0,.5)}
+.fd-static{position:absolute;inset:0;border-radius:50%;pointer-events:none;background:repeating-linear-gradient(115deg,rgba(255,255,255,.08) 0 1px,transparent 1px 3px);opacity:0;mix-blend-mode:overlay}
+.fd-stage.tuning .fd-static{opacity:.5;animation:fdGrain .12s steps(2) infinite}
+@keyframes fdGrain{0%{transform:translate(0,0)}50%{transform:translate(-2px,1px)}100%{transform:translate(1px,-2px)}}
+.fd-readout{font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#e0bd8c;margin-bottom:4px;min-height:16px}
+.fd-stage.tuning ~ .fd-readout{animation:fdFlicker .1s steps(2) infinite}
+@keyframes fdFlicker{0%,100%{opacity:1}50%{opacity:.55}}
+.fd-hint{font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#aaa193;margin-bottom:28px}
+.fd-manual{display:flex;gap:12px;justify-content:center;margin-bottom:40px}
+.fd-manual button{font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#e0bd8c;background:transparent;border:1px solid rgba(196,149,85,.35);border-radius:2px;padding:10px 16px;cursor:pointer;transition:border-color .2s,background .2s}
+.fd-manual button:hover{border-color:#c49555;background:rgba(196,149,85,.08)}
+.fd-card{width:min(92vw,520px);margin:0 auto 40px;background:linear-gradient(165deg,#1b1711,#100e0a);border:1px solid rgba(196,149,85,.28);border-radius:3px;padding:clamp(26px,5vw,40px);text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.5);opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease}
+.fd-card.show{opacity:1;transform:translateY(0)}
+.fd-card .fd-tag{font-family:Arial,Helvetica,sans-serif;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#c49555;margin-bottom:16px}
+.fd-card blockquote{margin:0;font-family:Georgia,serif;font-style:italic;color:#f4efe4;font-size:clamp(18px,3vw,21px);line-height:1.62}
+.fd-cta{display:inline-block;padding:16px 26px;color:#141414;background:linear-gradient(135deg,#e0bd8c,#c49555);text-decoration:none;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+@media (prefers-reduced-motion: reduce){.fd-stage.tuning .fd-static{animation:none;opacity:.3}.fd-stage.tuning ~ .fd-readout{animation:none}}
+</style>
+<section id="archive" class="fd-section">
+  <div class="fd-wrap">
+    <div class="fd-glyphrow">✦ ✦ ✦</div>
+    <p class="fd-eyebrow">The Living Archive</p>
+    <h2 class="fd-h2">Your beliefs are a frequency.<br><em>Turn the dial and tune in.</em></h2>
+    <p class="fd-intro">Written across more than fifteen years of questioning, transformation, and becoming. Turn the dial to a theme, and let a reflection meet you exactly where you are.</p>
+
+    <div class="fd-stage" id="fdStage">
+      <div class="fd-pointer"></div>
+      <div class="fd-ring" id="fdRing"></div>
+      <div class="fd-knob" id="fdKnob" role="slider" aria-label="Tune the frequency dial" aria-valuemin="1" aria-valuemax="10" aria-valuenow="1" tabindex="0">
+        <div class="fd-static"></div>
+        <div class="fd-needle" id="fdNeedle"></div>
+        <div class="fd-hub"></div>
+      </div>
+    </div>
+    <div class="fd-readout" id="fdReadout">Ego &amp; the False Self</div>
+    <div class="fd-hint">Drag the dial, or use the buttons</div>
+    <div class="fd-manual">
+      <button id="fdPrev" type="button">&#9664; Tune</button>
+      <button id="fdNext" type="button">Tune &#9654;</button>
+    </div>
+
+    <div class="fd-card" id="fdCard">
+      <div class="fd-tag" id="fdCardTag"></div>
+      <blockquote id="fdCardText"></blockquote>
+    </div>
+
+    <a href="archive.html" class="fd-cta">Enter the Full Archive &rarr;</a>
+    <small style="display:block;margin-top:28px;color:rgba(244,239,228,.45);font-size:11px;letter-spacing:.16em;text-transform:uppercase">Words by Liam Helton · MBN Wisdom</small>
+  </div>
+</section>
+<script>
+(function(){
+  var CATS=[
+    {glyph:"◇",name:"Ego &amp; the False Self",tag:"No. 14847",text:"Beneath the ego lives a gift unique to the host, often left undiscovered because fear, echoed through those around him, convinces him it will never amount to anything."},
+    {glyph:"∷",name:"Letting Go &amp; Change",tag:"No. 14834",text:"What if life's greatest disruptions arrive not to destroy us, but to shake loose those who no longer possess the strength, loyalty, or alignment to travel where our soul is leading? Offer grace to those who fell away."},
+    {glyph:"✦",name:"Love, Relationships &amp; Soul",tag:"No. 14844",text:"Everyone you encounter is consciousness meeting you through a different perspective, an avatar within the dream reflecting what your soul came to remember."},
+    {glyph:"☉",name:"Faith &amp; Inner Guidance",tag:"No. 14863",text:"Your beliefs help shape the reality you live in. Just as tuning a radio to a different station changes the music you hear, the beliefs you carry shape what you notice, pursue, and welcome into your life."},
+    {glyph:"▲",name:"Resilience &amp; Perseverance",tag:"No. 14851",text:"Discomfort is not the enemy. It is the soul's invitation to step beyond the boundaries of uncertainty. Growth begins where familiarity ends."},
+    {glyph:"●",name:"Mindset &amp; Perspective",tag:"No. 14858",text:"What you accept completes. What you resist continues to ask for your attention. Surrendering expectations makes room for an outcome the mind could not have imagined."},
+    {glyph:"○",name:"Community &amp; Human Behavior",tag:"No. 14843",text:"Speaking highly of those who speak lowly of you reveals the height you choose to live from. Keep your head above the current."},
+    {glyph:"✺",name:"Dreams, Goals &amp; Purpose",tag:"No. 14861",text:"Be ready to meet the moment you have imagined. Move toward it, carrying the gratitude, courage, and openness you hope to feel when it arrives. A thought is a seed."},
+    {glyph:"♡",name:"Parenting &amp; Family",tag:"No. 14859",text:"I came into this life to interrupt a cycle, not carry it forward. When one soul chooses differently, generations can walk toward a new horizon."},
+    {glyph:"★",name:"Wisdom &amp; Experience",tag:"No. 14864",text:"Experience speaks most clearly through those who have survived the storm. One question to someone wiser might have revealed another path."}
+  ];
+  var STEP=360/CATS.length;
+  var stage=document.getElementById("fdStage"),ring=document.getElementById("fdRing"),knob=document.getElementById("fdKnob"),
+      needle=document.getElementById("fdNeedle"),readout=document.getElementById("fdReadout"),
+      prevBtn=document.getElementById("fdPrev"),nextBtn=document.getElementById("fdNext"),
+      card=document.getElementById("fdCard"),cardTag=document.getElementById("fdCardTag"),cardText=document.getElementById("fdCardText");
+  if(!stage||!knob) return;
+  var reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var tickEls=[];
+  CATS.forEach(function(c,i){
+    var t=document.createElement("div");
+    t.className="fd-tick";
+    t.style.transform="rotate("+(i*STEP)+"deg)";
+    t.innerHTML='<span class="fd-glyph" style="transform-origin:9px 123px">'+c.glyph+'</span>';
+    ring.appendChild(t);
+    tickEls.push(t);
+  });
+  var rotation=0,lastIndex=0,dragging=false,startPointerAngle=0,startRotation=0;
+  function norm360(d){return ((d%360)+360)%360;}
+  function indexFor(rot){return Math.round(norm360(rot)/STEP)%CATS.length;}
+  function angleFromCenter(x,y){
+    var r=knob.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+    return Math.atan2(x-cx,-(y-cy))*180/Math.PI;
+  }
+  function applyRotation(animate){
+    needle.style.transition=animate?"transform .45s cubic-bezier(.2,.8,.2,1)":"none";
+    needle.style.transform="translateX(-50%) rotate("+rotation+"deg)";
+  }
+  function setActiveTick(idx){tickEls.forEach(function(el,i){el.classList.toggle("active",i===idx);});}
+  function setLiveLabel(idx){readout.innerHTML=CATS[idx].name;knob.setAttribute("aria-valuenow",idx+1);}
+  function reveal(idx){
+    var c=CATS[idx];
+    card.classList.remove("show");
+    setTimeout(function(){
+      cardTag.innerHTML=c.name+" &middot; "+c.tag;
+      cardText.textContent=c.text;
+      card.classList.add("show");
+    }, reduceMotion?0:160);
+  }
+  function goTo(idx,animate){
+    idx=((idx%CATS.length)+CATS.length)%CATS.length;
+    rotation=idx*STEP;
+    applyRotation(animate);
+    setActiveTick(idx);
+    setLiveLabel(idx);
+    lastIndex=idx;
+    reveal(idx);
+  }
+  setActiveTick(0);setLiveLabel(0);applyRotation(false);reveal(0);
+  prevBtn.addEventListener("click",function(){goTo(lastIndex-1,true);});
+  nextBtn.addEventListener("click",function(){goTo(lastIndex+1,true);});
+  knob.addEventListener("keydown",function(e){
+    if(e.key==="ArrowLeft"||e.key==="ArrowDown"){e.preventDefault();goTo(lastIndex-1,true);}
+    if(e.key==="ArrowRight"||e.key==="ArrowUp"){e.preventDefault();goTo(lastIndex+1,true);}
+  });
+  function pointerDown(e){
+    dragging=true;
+    stage.classList.add("tuning");
+    knob.setPointerCapture&&e.pointerId!=null&&knob.setPointerCapture(e.pointerId);
+    startPointerAngle=angleFromCenter(e.clientX,e.clientY);
+    startRotation=rotation;
+    needle.style.transition="none";
+  }
+  function pointerMove(e){
+    if(!dragging) return;
+    var ang=angleFromCenter(e.clientX,e.clientY);
+    var delta=ang-startPointerAngle;
+    delta=((delta+180)%360+360)%360-180;
+    rotation=startRotation+delta;
+    applyRotation(false);
+    var idx=indexFor(rotation);
+    if(idx!==lastIndex){lastIndex=idx;setActiveTick(idx);setLiveLabel(idx);}
+  }
+  function pointerUp(){
+    if(!dragging) return;
+    dragging=false;
+    stage.classList.remove("tuning");
+    var idx=indexFor(rotation);
+    rotation=idx*STEP;
+    applyRotation(true);
+    setActiveTick(idx);
+    setLiveLabel(idx);
+    lastIndex=idx;
+    reveal(idx);
+  }
+  knob.addEventListener("pointerdown",pointerDown);
+  window.addEventListener("pointermove",pointerMove);
+  window.addEventListener("pointerup",pointerUp);
+  window.addEventListener("pointercancel",pointerUp);
+})();
+</script>
 </body>
 </html>
