@@ -85,6 +85,35 @@ footer{border-top:1px solid var(--line);padding:28px;text-align:center;color:var
 .list .card:nth-child(1){animation-delay:.03s}.list .card:nth-child(2){animation-delay:.09s}.list .card:nth-child(3){animation-delay:.15s}.list .card:nth-child(4){animation-delay:.21s}.list .card:nth-child(5){animation-delay:.27s}.list .card:nth-child(6){animation-delay:.33s}
 
 @media(max-width:520px){nav{padding:18px}}
+
+/* ---------- frequency dial ---------- */
+.fd-section{margin:8px 0 60px;text-align:center}
+.fd-label{font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.fd-sub{color:var(--dim);font-size:14px;line-height:1.6;max-width:380px;margin:0 auto 34px}
+.fd-stage{position:relative;width:min(62vw,230px);aspect-ratio:1;margin:0 auto 20px}
+.fd-ring{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 50% 42%,#1d1912,#0e0c09 72%);box-shadow:inset 0 0 0 1px rgba(196,149,85,.35),inset 0 16px 36px rgba(0,0,0,.65),0 20px 50px rgba(0,0,0,.5)}
+.fd-tick{position:absolute;top:50%;left:50%;width:0;height:0;transform-origin:0 0}
+.fd-tick .fd-glyph{position:absolute;left:-9px;top:-105px;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--dim);transition:color .35s,text-shadow .35s,transform .35s}
+.fd-tick.active .fd-glyph{color:var(--bright);text-shadow:0 0 12px rgba(224,189,140,.75);transform:scale(1.25)}
+.fd-pointer{position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:10px solid var(--gold);filter:drop-shadow(0 0 5px rgba(196,149,85,.6))}
+.fd-knob{position:absolute;left:14%;top:14%;width:72%;height:72%;border-radius:50%;background:radial-gradient(circle at 34% 28%,#3a2f20,#211b12 55%,#15110b 100%);box-shadow:inset 0 2px 3px rgba(255,255,255,.12),inset 0 -9px 16px rgba(0,0,0,.6),0 8px 20px rgba(0,0,0,.5);cursor:grab;touch-action:none;display:flex;align-items:center;justify-content:center}
+.fd-knob:active{cursor:grabbing}
+.fd-knob::before{content:"";position:absolute;width:86%;height:86%;border-radius:50%;border:1px solid rgba(196,149,85,.22)}
+.fd-needle{position:absolute;top:8%;left:50%;width:2px;height:40%;transform-origin:50% 100%;transform:translateX(-50%);background:linear-gradient(to top,var(--gold),var(--bright));box-shadow:0 0 9px rgba(224,189,140,.7);border-radius:2px}
+.fd-needle::after{content:"";position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;background:var(--bright);box-shadow:0 0 10px rgba(224,189,140,.9)}
+.fd-hub{width:22%;height:22%;border-radius:50%;background:radial-gradient(circle at 38% 32%,#5b4a30,#201a11);box-shadow:inset 0 0 0 1px rgba(196,149,85,.4),0 1px 2px rgba(0,0,0,.5)}
+.fd-static{position:absolute;inset:0;border-radius:50%;pointer-events:none;background:repeating-linear-gradient(115deg,rgba(255,255,255,.08) 0 1px,transparent 1px 3px);opacity:0;mix-blend-mode:overlay}
+.fd-stage.tuning .fd-static{opacity:.5;animation:fdGrain .12s steps(2) infinite}
+@keyframes fdGrain{0%{transform:translate(0,0)}50%{transform:translate(-2px,1px)}100%{transform:translate(1px,-2px)}}
+.fd-readout{font-family:Inter,sans-serif;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--bright);margin-bottom:4px;min-height:16px}
+.fd-stage.tuning ~ .fd-readout{animation:fdFlicker .1s steps(2) infinite}
+@keyframes fdFlicker{0%,100%{opacity:1}50%{opacity:.55}}
+.fd-hint{font-family:Inter,sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:30px}
+.fd-manual{display:flex;gap:12px;justify-content:center;margin-bottom:4px}
+.fd-manual button{font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--bright);background:transparent;border:1px solid var(--line);border-radius:2px;padding:9px 14px;cursor:pointer;transition:border-color .2s,background .2s}
+.fd-manual button:hover{border-color:var(--gold);background:rgba(196,149,85,.08)}
+.fd-manual button:focus-visible{outline:2px solid var(--bright);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){.fd-stage.tuning .fd-static{animation:none;opacity:.3}.fd-stage.tuning ~ .fd-readout{animation:none}}
 </style>
 </head>
 <body>
@@ -97,10 +126,30 @@ footer{border-top:1px solid var(--line);padding:28px;text-align:center;color:var
     <p class="intro">Fifteen years of questioning, transformation, and becoming, gathered into one place. Choose a thread to follow, or let a reflection find you on its own.</p>
   </header>
 
+  <section class="fd-section" aria-label="Tune the frequency dial">
+    <div class="fd-label">Tune In</div>
+    <p class="fd-sub">Your beliefs are a frequency. Turn the dial to a theme, and let a reflection meet you there.</p>
+    <div class="fd-stage" id="fdStage">
+      <div class="fd-pointer"></div>
+      <div class="fd-ring" id="fdRing"></div>
+      <div class="fd-knob" id="fdKnob" role="slider" aria-label="Tune the frequency dial" aria-valuemin="1" aria-valuemax="10" aria-valuenow="1" tabindex="0">
+        <div class="fd-static"></div>
+        <div class="fd-needle" id="fdNeedle"></div>
+        <div class="fd-hub"></div>
+      </div>
+    </div>
+    <div class="fd-readout" id="fdReadout">Ego &amp; the False Self</div>
+    <div class="fd-hint">Drag the dial, or use the buttons</div>
+    <div class="fd-manual">
+      <button id="fdPrev" type="button">&#9664; Tune</button>
+      <button id="fdNext" type="button">Tune &#9654;</button>
+    </div>
+  </section>
+
   <div class="surprise-row">
     <button class="surprise" id="surprise" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v5h5M20 20v-5h-5M4 9a9 9 0 0 1 15-4.5M20 15a9 9 0 0 1-15 4.5"/></svg>
-      Let one find me
+      Or let one find me completely at random
     </button>
   </div>
 
@@ -148,7 +197,7 @@ const R = [
   {id:"14825",cat:"letting-go",text:"Staying anchored in yesterday imprisons infinite potential in a moment that no longer exists. Blame is a shadow sustained by one unanswered question."},
   {id:"14834",cat:"letting-go",text:"What if life's greatest disruptions arrive not to destroy us, but to shake loose those who no longer possess the strength, loyalty, or alignment to travel where our soul is leading? Look back and recognize the intelligence within the separation. Then offer grace to those who fell away. They were not meant to reach every destination with you."},
   {id:"14853",cat:"letting-go",text:"Sometimes change must exhaust you back into sanity. Life lets you repeat the same patterns until the pain of staying unchanged outweighs the fear of becoming someone new."},
-  {id:"14865", cat:"letting-go", text:"When you awaken and remember who you truly are, one of the deepest shocks is discovering that some who once stood beside you no longer resonate with who you are becoming. The soul's remembering exposes what the ego maintained through fear, approval, and the need to belong. As your inner world changes, you stop feeding the patterns that held those connections together. Some relationships deepen. Others loosen as the old agreements fall away. You can love someone and still recognize that your paths have separated. Honor what you shared, but do not abandon your truth to preserve a bond that requires you to remain asleep."},
+  {id:"14865",cat:"letting-go",text:"When you awaken and remember who you truly are, one of the deepest shocks is discovering that some who once stood beside you no longer resonate with who you are becoming. The soul's remembering exposes what the ego maintained through fear, approval, and the need to belong. As your inner world changes, you stop feeding the patterns that held those connections together. Some relationships deepen. Others loosen as the old agreements fall away. You can love someone and still recognize that your paths have separated. Honor what you shared, but do not abandon your truth to preserve a bond that requires you to remain asleep."},
 
   {id:"14832",cat:"soul",text:"The 'villains' in your story are loved ones who agreed, before this life began, to awaken emotions you came here to master. Not punishment. Sacred agreement."},
   {id:"14844",cat:"soul",text:"Everyone you encounter is consciousness meeting you through a different perspective, an avatar within the dream reflecting what your soul came to remember."},
@@ -157,7 +206,7 @@ const R = [
 
   {id:"14827",cat:"faith",text:"Your beliefs become the unseen forces that manifest either blessings or suffering into your life."},
   {id:"14820",cat:"faith",text:"Reason, liberated from hatred, becomes the architect of peace. A better tomorrow is not merely awaited. It is born within the consciousness we choose today."},
-  {id:"14863", cat:"faith", text:"Your beliefs help shape the reality you live in. Just as tuning a radio to a different station changes the music you hear, the beliefs you carry influence your thoughts, choices, and experiences. This is the frequency you bring into the world, shaping what you notice, pursue, and welcome into your life. Look around you. What beliefs are reflected in the world you are helping create?", img:"14863.jpg"},
+  {id:"14863",cat:"faith",text:"Your beliefs help shape the reality you live in. Just as tuning a radio to a different station changes the music you hear, the beliefs you carry influence your thoughts, choices, and experiences. This is the frequency you bring into the world, shaping what you notice, pursue, and welcome into your life. Look around you. What beliefs are reflected in the world you are helping create?",img:"14863.jpg"},
 
   {id:"14828",cat:"resilience",text:"Smile in chaos. For the storm may command the world around you, but it cannot rule the world within you."},
   {id:"14830",cat:"resilience",text:"Rather than complain about prices, people, jobs, or circumstances, make intentional decisions today that reduce their power over your tomorrow. Difficult seasons do not define your life unless you refuse to change course."},
@@ -166,14 +215,14 @@ const R = [
   {id:"14818",cat:"mindset",text:"Thoughts are hidden buttons within the elevator of consciousness. Each thought's frequency determines which floor of reality you arrive on."},
   {id:"14852",cat:"mindset",text:"You are not a work in progress simply because time continues to pass. Progress requires movement, not the repetition of the same choices."},
   {id:"14858",cat:"mindset",text:"What you accept completes. What you resist continues to ask for your attention. Surrendering expectations makes room for an outcome the mind could not have imagined."},
-  {id:"14862", cat:"mindset", text:"Begin with the chaos your hands can reach. Clear a corner, restore order, and give your mind room to breathe. Your surroundings can quietly reveal what you have postponed, outgrown, or become afraid to release. Sometimes the things we hold become walls around feelings we have yet to face. Meet that recognition with compassion, then act. Each deliberate choice to put something in its place is a small return to your own authority. Let the space you reclaim become an invitation to live consciously within it."},
+  {id:"14862",cat:"mindset",text:"Begin with the chaos your hands can reach. Clear a corner, restore order, and give your mind room to breathe. Your surroundings can quietly reveal what you have postponed, outgrown, or become afraid to release. Sometimes the things we hold become walls around feelings we have yet to face. Meet that recognition with compassion, then act. Each deliberate choice to put something in its place is a small return to your own authority. Let the space you reclaim become an invitation to live consciously within it."},
 
   {id:"14829",cat:"community",text:"Do not abandon your loyalty over a disagreement. Let differences reveal the strength of your character, not become an excuse to betray it."},
   {id:"14839",cat:"community",text:"It is amazing what becomes possible when we recognize every human being as equally important. Everyone is important. Now live in a way that proves to you that you are too."},
   {id:"14843",cat:"community",text:"Speaking highly of those who speak lowly of you reveals the height you choose to live from. Keep your head above the current."},
 
   {id:"14860",cat:"purpose",text:"The meaning of life is not handed to you. It is gathered. It changes as you grow, found in what you value, what you choose, what breaks you open, and what you still reach for. No one can find it for you. Begin&hellip;"},
-  {id:"14861", cat:"purpose", text:"Be ready to meet the moment you have imagined. Move toward it, carrying the gratitude, courage, and openness you hope to feel when it arrives. Let that inner knowing shape your choices before the outer world offers proof. A thought is a seed. Feeling gives it life, and action gives it roots. What once existed only within you can take form through what you patiently tend.", img:"14861.jpg"},
+  {"id": "14861", "cat": "purpose", "text": "Be ready to meet the moment you have imagined. Move toward it, carrying the gratitude, courage, and openness you hope to feel when it arrives. Let that inner knowing shape your choices before the outer world offers proof. A thought is a seed. Feeling gives it life, and action gives it roots. What once existed only within you can take form through what you patiently tend.", "img": "14861.jpg"},
 
   {id:"14859",cat:"family",text:"I came into this life to interrupt a cycle, not carry it forward. What was handed to me is not what I must hand to my children. When one soul chooses differently, generations can walk toward a new horizon."},
 
@@ -284,6 +333,118 @@ function showToast(msg){
     const r=R.find(x=>x.id===id);
     if(r)setTimeout(()=>openSheet(r),250);
   }
+})();
+
+/* ---------- frequency dial ---------- */
+(function(){
+  const STEP = 360 / CATS.length;
+  const stage=document.getElementById("fdStage");
+  const ring=document.getElementById("fdRing");
+  const knob=document.getElementById("fdKnob");
+  const needle=document.getElementById("fdNeedle");
+  const readout=document.getElementById("fdReadout");
+  const prevBtn=document.getElementById("fdPrev");
+  const nextBtn=document.getElementById("fdNext");
+  if(!stage||!knob) return;
+
+  const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let lastShown={};
+
+  const tickEls=[];
+  CATS.forEach((c,i)=>{
+    const t=document.createElement("div");
+    t.className="fd-tick";
+    t.style.transform=`rotate(${i*STEP}deg)`;
+    t.innerHTML=`<span class="fd-glyph" style="transform-origin:9px 114px">${c.glyph}</span>`;
+    ring.appendChild(t);
+    tickEls.push(t);
+  });
+
+  let rotation=0, lastIndex=0, dragging=false, startPointerAngle=0, startRotation=0;
+
+  function norm360(d){ return ((d%360)+360)%360; }
+  function indexFor(rot){ return Math.round(norm360(rot)/STEP) % CATS.length; }
+  function angleFromCenter(x,y){
+    const r=knob.getBoundingClientRect();
+    const cx=r.left+r.width/2, cy=r.top+r.height/2;
+    return Math.atan2(x-cx, -(y-cy)) * 180/Math.PI;
+  }
+  function applyRotation(animate){
+    needle.style.transition = animate ? "transform .45s cubic-bezier(.2,.8,.2,1)" : "none";
+    needle.style.transform = `translateX(-50%) rotate(${rotation}deg)`;
+  }
+  function setActiveTick(idx){ tickEls.forEach((el,i)=>el.classList.toggle("active", i===idx)); }
+  function setLiveLabel(idx){
+    readout.innerHTML = CATS[idx].name;
+    knob.setAttribute("aria-valuenow", idx+1);
+  }
+  function pickReflection(idx){
+    const key=CATS[idx].key;
+    const pool=R.filter(r=>r.cat===key);
+    if(!pool.length) return null;
+    if(pool.length===1) return pool[0];
+    let pick;
+    do{ pick=pool[Math.floor(Math.random()*pool.length)]; }while(pick===lastShown[key] && pool.length>1);
+    lastShown[key]=pick;
+    return pick;
+  }
+  function reveal(idx){
+    const r=pickReflection(idx);
+    if(r) setTimeout(()=>openSheet(r), reduceMotion?0:350);
+  }
+  function goTo(idx, animate){
+    idx=((idx%CATS.length)+CATS.length)%CATS.length;
+    rotation=idx*STEP;
+    applyRotation(animate);
+    setActiveTick(idx);
+    setLiveLabel(idx);
+    lastIndex=idx;
+    reveal(idx);
+  }
+
+  setActiveTick(0); setLiveLabel(0); applyRotation(false);
+
+  prevBtn.addEventListener("click", ()=>goTo(lastIndex-1, true));
+  nextBtn.addEventListener("click", ()=>goTo(lastIndex+1, true));
+  knob.addEventListener("keydown",(e)=>{
+    if(e.key==="ArrowLeft"||e.key==="ArrowDown"){e.preventDefault();goTo(lastIndex-1,true);}
+    if(e.key==="ArrowRight"||e.key==="ArrowUp"){e.preventDefault();goTo(lastIndex+1,true);}
+  });
+
+  function pointerDown(e){
+    dragging=true;
+    stage.classList.add("tuning");
+    knob.setPointerCapture && e.pointerId!=null && knob.setPointerCapture(e.pointerId);
+    startPointerAngle=angleFromCenter(e.clientX,e.clientY);
+    startRotation=rotation;
+    needle.style.transition="none";
+  }
+  function pointerMove(e){
+    if(!dragging) return;
+    const ang=angleFromCenter(e.clientX,e.clientY);
+    let delta=ang-startPointerAngle;
+    delta=((delta+180)%360+360)%360-180;
+    rotation=startRotation+delta;
+    applyRotation(false);
+    const idx=indexFor(rotation);
+    if(idx!==lastIndex){ lastIndex=idx; setActiveTick(idx); setLiveLabel(idx); }
+  }
+  function pointerUp(){
+    if(!dragging) return;
+    dragging=false;
+    stage.classList.remove("tuning");
+    const idx=indexFor(rotation);
+    rotation=idx*STEP;
+    applyRotation(true);
+    setActiveTick(idx);
+    setLiveLabel(idx);
+    lastIndex=idx;
+    reveal(idx);
+  }
+  knob.addEventListener("pointerdown", pointerDown);
+  window.addEventListener("pointermove", pointerMove);
+  window.addEventListener("pointerup", pointerUp);
+  window.addEventListener("pointercancel", pointerUp);
 })();
 </script>
 </body>
