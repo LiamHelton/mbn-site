@@ -22,6 +22,7 @@
 @media(max-width:520px){body{font-size:17px}.brand{font-size:10px;letter-spacing:.12em}.nav-links{gap:14px}.nav-links a{font-size:10px}.nav-links .nav-begin{padding:9px 11px}.hero{min-height:660px}.hero-inner{padding:60px 24px 75px}.hero-photo{object-position:68% 50%}h1{font-size:64px}.hero-meta{gap:12px;flex-wrap:wrap}.hero-lead{font-size:20px}.actions{gap:20px}.topic{padding:21px 15px;gap:9px}.topic span{font-size:18px}.topic-result{grid-template-columns:1fr;gap:25px}.reflection-preview{padding:22px;border-left:2px solid var(--gold)}.request-box{padding:23px}.request-topic-list{grid-template-columns:1fr}.wrap{padding:0 22px}.pause-ring{width:180px;height:180px}.button{min-height:48px}.faq-grid{gap:25px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal,.button{transition:none}.motion-ready .reveal{opacity:1;transform:none}}
 </style>
+<link rel="manifest" href="/mbn.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="MBN Wisdom"><link rel="apple-touch-icon" href="/mbn-icon-180.png">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -89,5 +90,10 @@ pauseStart.addEventListener('click',()=>{
 });
 pauseReset.addEventListener('click',()=>{clearInterval(pauseInterval);pauseInterval=null;pauseRemaining=60;drawPause();pauseStart.textContent='Begin the minute';pauseReset.hidden=true;pausePrompt.textContent='Settle into the seat you are in.';});
 if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.body.classList.add('motion-ready');const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}}),{threshold:.08});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));}
+</script>
+<script>
+if(new URLSearchParams(location.search).get('app')==='1'||matchMedia('(display-mode: standalone)').matches||navigator.standalone){
+ const back=document.querySelector('.nav .brand');back.href='/app.html';back.textContent='← BACK TO TODAY';
+}
 </script>
 </body></html>

@@ -130,9 +130,10 @@ footer{border-top:1px solid var(--line);padding:28px;text-align:center;color:var
 @media(max-width:520px){.overlay{padding:12px}.sheet{max-height:calc(100dvh - 24px);padding:24px}.sheet .close{margin:0 0 8px 8px}.sheet-actions .pill{flex:1 1 100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.overlay,.sheet,.card,.hero,.cats{animation:none!important;opacity:1;transform:none}.surprise,.cat,.card{transition:none}}
 </style>
+<link rel="manifest" href="/mbn.webmanifest"><meta name="theme-color" content="#141311"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="MBN Wisdom"><link rel="apple-touch-icon" href="/mbn-icon-180.png">
 </head>
 <body>
-<nav><a href="index.html">&larr; MBN Wisdom</a><a href="coffee-with-liam.html">Coffee with Liam</a></nav>
+<nav><a id="mbnReturn" href="index.html">&larr; MBN Wisdom</a><a href="/app.html">Daily app</a><a href="coffee-with-liam.html">Coffee with Liam</a></nav>
 
 <main>
   <header class="hero">
@@ -504,6 +505,11 @@ function showToast(msg){
   window.addEventListener("pointerup", pointerUp);
   window.addEventListener("pointercancel", pointerUp);
 })();
+</script>
+<script>
+if(new URLSearchParams(location.search).get('app')==='1'||matchMedia('(display-mode: standalone)').matches||navigator.standalone){
+ const back=document.getElementById('mbnReturn');back.href='/app.html';back.textContent='← Back to Today';
+}
 </script>
 </body>
 </html>
