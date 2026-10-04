@@ -36,7 +36,7 @@ h1 em{color:var(--bright);font-style:italic}
 .surprise svg{width:14px;height:14px;transition:transform .5s}
 .surprise:active svg{transform:rotate(180deg)}
 
-.count{text-align:center;color:var(--dim);font-family:Inter,sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin:-40px 0 36px}
+.count{text-align:center;color:var(--dim);font-family:Inter,sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 36px}
 
 /* category grid */
 .cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:8px;animation:rise .9s ease both;animation-delay:.1s}
@@ -173,7 +173,7 @@ footer{border-top:1px solid var(--line);padding:28px;text-align:center;color:var
   <form id="archiveSearch" role="search" style="margin:24px 0">
     <label for="searchInput">Search all reflections by number or words</label>
     <div style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap">
-      <input id="searchInput" type="search" placeholder="Try 14851, forgiveness, or becoming" style="flex:1;min-width:200px;padding:14px;border-radius:12px;font:inherit">
+      <input id="searchInput" type="search" placeholder="Try 14851, forgiveness, or becoming" style="flex:1;min-width:200px;padding:14px;border-radius:2px;font:inherit;background:#1a1812;color:var(--cream);border:1px solid var(--line)">
       <button class="pill gold" type="submit">Search</button>
     </div>
   </form>
