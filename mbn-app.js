@@ -7,7 +7,11 @@
  function decode(value){const box=document.createElement('textarea');box.innerHTML=value;return box.value;}
  function mirrorURL(r){return '/archive.html?app=1#'+encodeURIComponent(r.cat)+'/'+encodeURIComponent(r.id)+'/mirror';}
  function dayNumber(date){return Math.floor(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate())/86400000);}
- function chooseDaily(list,date=new Date()){const sorted=[...list].sort((a,b)=>Number(a.id)-Number(b.id));return sorted[((dayNumber(date)%sorted.length)+sorted.length)%sorted.length];}
+ function chooseDaily(list,date=new Date()){
+  const ordered=[...list].sort((a,b)=>(a.dailyIndex??Number(a.id))-(b.dailyIndex??Number(b.id)));
+  const elapsed=dayNumber(date)-Math.floor(Date.UTC(2026,9,4)/86400000);
+  return ordered[((elapsed%ordered.length)+ordered.length)%ordered.length];
+ }
  function parseArchive(html){
   const doc=new DOMParser().parseFromString(html,'text/html');
   const script=[...doc.scripts].map(s=>s.textContent).find(text=>/const\s+R\s*=\s*\[/.test(text));

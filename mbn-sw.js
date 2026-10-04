@@ -1,5 +1,5 @@
 'use strict';
-const CACHE='mbn-practice-v1';
+const CACHE='mbn-practice-v2';
 const SHELL=['/app.html','/mbn-app.css','/mbn-app.js','/mbn.webmanifest','/mbn-icon-180.png','/mbn-icon-192.png','/mbn-icon-512.png','/mbn-icon-maskable.png','/archive.html','/coffee-with-liam.html'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL))));
 self.addEventListener('activate',event=>event.waitUntil(Promise.all([caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('mbn-practice-')&&key!==CACHE).map(key=>caches.delete(key)))),self.clients.claim()])));
