@@ -280,6 +280,19 @@
     .fw-inner .fw-cta{ justify-content:center; }
   }
 
+  /* ---- The Station We Carry: public gift ---- */
+  #station-gift{scroll-margin-top:90px; border-bottom:1px solid var(--line);}
+  .station-gift-inner{display:grid;grid-template-columns:250px minmax(0,1fr);gap:60px;align-items:center;max-width:900px;margin:0 auto;}
+  .station-gift-cover{display:block;border:1px solid var(--line);border-radius:3px;overflow:hidden;box-shadow:0 18px 48px rgba(0,0,0,.25);}
+  .station-gift-cover img{width:100%;height:auto;}
+  .station-gift-copy h2{font-size:clamp(30px,4vw,42px);line-height:1.18;color:var(--cream);margin:14px 0 20px;}
+  .station-gift-copy p{color:var(--ink-dim);margin:0 0 24px;max-width:480px;}
+  .station-gift-copy .station-gift-note{font-family:'Inter',sans-serif;font-size:12px;margin:18px 0 0;}
+  .station-gift-link{display:inline-block;background:var(--gold);color:#191713;border:1px solid var(--gold);border-radius:2px;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;line-height:1.5;text-align:center;text-decoration:none;padding:14px 22px;}
+  .station-gift-link:hover{background:var(--gold-bright);border-color:var(--gold-bright);}
+  #station-gift a:focus-visible{outline:2px solid var(--gold-bright);outline-offset:5px;}
+  @media(max-width:640px){.station-gift-inner{grid-template-columns:1fr;gap:32px;text-align:center;}.station-gift-cover{width:220px;max-width:100%;margin:0 auto;}.station-gift-copy p{margin-left:auto;margin-right:auto;}}
+
   /* ---- image series ---- */
   .image-series .grid{ grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
   /* 5/8 matches the real trim size of these books — at 5/7 the Money
@@ -469,6 +482,26 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+<div class="fracture"></div>
+
+<!-- The Station We Carry: free public gift, no signup required -->
+<section class="section-pad" id="station-gift" aria-labelledby="station-gift-title">
+  <div class="wrap">
+    <div class="station-gift-inner">
+      <a class="station-gift-cover" href="/the-station-we-carry.html" aria-label="Read The Station We Carry for free">
+        <img src="/The-Station-We-Carry-Cover.png" width="1067" height="1600" alt="The Station We Carry cover: Understanding the patterns we carry and finding a different frequency" loading="lazy" decoding="async">
+      </a>
+      <div class="station-gift-copy">
+        <div class="eyebrow">A free gift from MBN Wisdom</div>
+        <h2 id="station-gift-title">The Station We Carry</h2>
+        <p>A free essay on the patterns we carry and the possibility of choosing differently.</p>
+        <a class="station-gift-link" href="/the-station-we-carry.html">Read or Download Free</a>
+        <p class="station-gift-note">10-page PDF &middot; No signup required</p>
+      </div>
+    </div>
   </div>
 </section>
 
